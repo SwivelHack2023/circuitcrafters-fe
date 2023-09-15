@@ -25,7 +25,7 @@ axiosInstance.interceptors.request.use(
           console.error(error)
         }
       }
-      config.headers['AccessToken'] = `${accessToken}`
+      config.headers['Accesstoken'] = `${accessToken}`
     }
 
     return config

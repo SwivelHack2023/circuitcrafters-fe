@@ -8,7 +8,7 @@ export const useLogin = () => {
   return useMutation(login, {
     onSuccess: async (data) => {
       toast.success('Successfully Login 👌')
-      navigate('/dashboard')
+      data === 'ADMIN' ? navigate('/employees') : navigate('/dashboard')
     },
     onError: async (error) => {
       toast.error('Login failed. Please check your credentials.')

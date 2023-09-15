@@ -1,16 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { useFetchTasks } from 'src/hooks/useJira'
-import { useFetchMatrix } from 'src/hooks/useSonar'
-
+import { useParams } from 'react-router-dom'
+import { useFetchEmployees } from 'src/hooks/useEmployees'
+import { useFetchEmployeeTasks } from 'src/hooks/useJira'
+import { useFetchEmployeeMatrix } from 'src/hooks/useSonar'
 import { CCard, CCardBody, CCardFooter, CCol, CProgress, CRow, CWidgetStatsD } from '@coreui/react'
 import { CChartLine } from '@coreui/react-chartjs'
 import { getStyle, hexToRgba } from '@coreui/utils'
 import CIcon from '@coreui/icons-react'
 import { cil3d } from '@coreui/icons'
-const Dashboard = () => {
-  const { isLoading: taskIsLoading } = useFetchTasks()
-  const { isLoading: matrixIsLoading } = useFetchMatrix()
+function ViewEmployee() {
+  let params = useParams()
+  const { isLoading } = useFetchEmployees()
+
+  const { employees } = useSelector((state) => state.employee)
+
+  // Use the Array.prototype.find() method to filter the employee by id
+  const selectedEmployee = employees.find((employee) => employee.id === params.id)
+
+  //   useFetchEmployeeTasks(selectedEmployee?.email)
+  //   useFetchEmployeeMatrix(selectedEmployee?.email)
+
   const {
     tasks,
     bugCount,
@@ -24,7 +34,6 @@ const Dashboard = () => {
   } = useSelector((state) => state.jira)
 
   const { matrix } = useSelector((state) => state.sonar)
-
   const estimatedTimesInHours = []
   const totalTimesInHours = []
   const issueNames = []
@@ -195,4 +204,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default ViewEmployee

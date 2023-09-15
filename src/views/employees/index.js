@@ -1,5 +1,4 @@
 import React from 'react'
-
 import {
   CButton,
   CCard,
@@ -14,14 +13,16 @@ import {
   CTableRow,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilPencil, cilPeople, cilPlus, cilTrash, cilUser } from '@coreui/icons'
+import { cilExternalLink, cilPencil, cilPeople, cilPlus, cilTrash, cilUser } from '@coreui/icons'
 import { useFetchEmployees } from 'src/hooks/useEmployees'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const Employees = () => {
   const { isLoading } = useFetchEmployees()
   const { employees } = useSelector((state) => state.employee)
   const handleDelete = () => {}
+  const navigate = useNavigate()
   return (
     <CRow>
       <CCol xs>
@@ -79,6 +80,17 @@ const Employees = () => {
                             <CButton color="danger" onClick={handleDelete(item)}>
                               <CIcon size="lg" icon={cilTrash} />
                             </CButton>
+                            {item.userType !== 'ADMIN' && (
+                              <CButton
+                                color="primary"
+                                className="mx-2"
+                                onClick={() => {
+                                  navigate(`/employees/view/${item.id}`)
+                                }}
+                              >
+                                <CIcon size="lg" icon={cilExternalLink} />
+                              </CButton>
+                            )}
                           </CTableDataCell>
                         </CTableRow>
                       ))}

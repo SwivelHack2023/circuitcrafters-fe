@@ -22,7 +22,7 @@ import { useLogin } from 'src/hooks/useLogin'
 const Login = () => {
   const auth = isAccessTokenExpired()
   const navigate = useNavigate()
-  const [user, setUser] = useState({ email: 'dev.chamikara@gmail.com', password: 'admin123' })
+  const [user, setUser] = useState({ email: 'admin@gmail.com', password: 'admin123' })
   const { mutate: loginMutation } = useLogin()
 
   useEffect(() => {

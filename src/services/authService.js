@@ -84,7 +84,7 @@ export async function login({ email, password }) {
     localStorage.setItem('role', response.data.userType)
     localStorage.setItem('name', response.data.name)
     localStorage.setItem('email', response.data.email)
-    return response.data.accessToken
+    return response.data.userType
   } catch (error) {
     // Handle login error
     console.error(error)

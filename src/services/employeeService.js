@@ -2,7 +2,7 @@ import axios from '../utils/axiosInstance'
 
 export const addEmployee = async (employeeData) => {
   try {
-    const response = await axios.post('user', employeeData)
+    const response = await axios.post('user/register', employeeData)
     return response.data
   } catch (error) {
     throw new Error('Failed to add employee.')
